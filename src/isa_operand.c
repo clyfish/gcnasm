@@ -43,7 +43,8 @@ const isa_operand_type isa_simple_operand_list[] =
 	{"VCCZ",		0xFB, VCCZ			},
 	{"EXECZ",		0xFC, EXECZ			},
 	{"SCC",			0xFD, SCC			},
-	{"SRC_LDS_DIR",	0xFE, SRC_LDS_DIR	}
+	{"SRC_LDS_DIR",	0xFE, SRC_LDS_DIR	},
+	{"VOP3B",		0x00, ZERO			}
 };
 
 const unsigned int isa_simple_operand_count = sizeof(isa_simple_operand_list)

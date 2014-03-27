@@ -186,16 +186,16 @@ isa_op_code* parseLine(char *line)
 	// Strip comments
 	line_strip = parseField(&line, comment_delimiter);
 
+	// Convert line_strip to uppercase
+	for (i = 0; line_strip[i]; ++i)
+		line_strip[i] = (char) toupper(line_strip[i]);
+
 	// Get instruction token
 	token = parseField(&line_strip, field_delimiter);
 
 	// Skip empty lines
 	if (token == NULL)
 		return NULL;
-
-	// Convert token to uppercase
-	for (i = 0; token[i]; ++i)
-		token[i] = (char) toupper(token[i]);
 
 	for (i = 0; i < isa_instr_count; ++i)
 		if (strcmp(isa_instr_list[i].name, token) == 0)
@@ -282,7 +282,11 @@ isa_op_code* parseLine(char *line)
 		#undef CASE_PARSE
 
 		case VOPC:
-			result = parseAlternate(isa_instr_list[i], argc, args);
+			if (strncmp(args[argc - 1], "VOP3B", strlen("VOP3B")) == 0) {
+				result = parseAlternate(isa_instr_list[i], argc, args);
+			} else {
+				result = parseVOPC(isa_instr_list[i], argc, args);
+			}
 			break;
 		default:
 			WARNING("unsupported encoding type for instruction '%s'", 

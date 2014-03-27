@@ -19,6 +19,7 @@
 isa_op_code* parseVOPC(isa_instr instr, int argc, char **args)
 {
 	char *vsrc1_str, *src0_str;
+	int has_vcc;
 
 	isa_operand *vsrc1_op, *src0_op;	// ISA operand structs
 	isa_op_code *op_code;				// Generated opcode struct
@@ -28,9 +29,11 @@ isa_op_code* parseVOPC(isa_instr instr, int argc, char **args)
 	if (argc < 2)
 		ERROR("number of passed operands is too low");
 
+	has_vcc = argc == 3;
+
 	// Setup arguments
-	src0_str	= args[0];
-	vsrc1_str	= args[1];
+	src0_str	= args[0 + has_vcc];
+	vsrc1_str	= args[1 + has_vcc];
 
 	// Parse operands
 	op_code->code = instr.op_code;

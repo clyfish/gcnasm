@@ -14,7 +14,5 @@ The input is a text file containing the assembly code that is to be processed. T
 
 ### Notes
 
-* s_endpgm needs a parameter to work (e.g. s_endpgm 0)
 * some macros for s_waitcnt need to be defined (e.g. lgkmcnt(3))
       #define lgkmcnt(3) 0x037f
-* for some instruction types only one format is used (VOPC is always used as VOP3b)
